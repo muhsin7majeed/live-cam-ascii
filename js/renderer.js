@@ -14,19 +14,37 @@ import { convertToASCII } from "./utils/asciiConverter.js";
  * Creates a renderer instance for ASCII art generation
  */
 export class ASCIIRenderer {
-  constructor(videoElement, asciiElement, getAsciiRamp) {
+  constructor(
+    videoElement,
+    asciiElement,
+    getAsciiRamp,
+    width = CANVAS_CONFIG.WIDTH,
+    height = CANVAS_CONFIG.HEIGHT
+  ) {
     this.video = videoElement;
     this.asciiElement = asciiElement;
     this.getAsciiRamp = getAsciiRamp;
     this.isRendering = false;
     this.animationFrameId = null;
     this.flipped = false;
+    this.width = width;
+    this.height = height;
 
     // Create canvas for processing
-    const { canvas, ctx } = createCanvas(
-      CANVAS_CONFIG.WIDTH,
-      CANVAS_CONFIG.HEIGHT
-    );
+    const { canvas, ctx } = createCanvas(width, height);
+    this.canvas = canvas;
+    this.ctx = ctx;
+  }
+
+  /**
+   * Updates the canvas size for rendering
+   * @param {number} width - New canvas width
+   * @param {number} height - New canvas height
+   */
+  updateCanvasSize(width, height) {
+    this.width = width;
+    this.height = height;
+    const { canvas, ctx } = createCanvas(width, height);
     this.canvas = canvas;
     this.ctx = ctx;
   }
@@ -85,21 +103,17 @@ export class ASCIIRenderer {
     drawVideoToCanvas(
       this.ctx,
       this.video,
-      CANVAS_CONFIG.WIDTH,
-      CANVAS_CONFIG.HEIGHT,
+      this.width,
+      this.height,
       this.flipped
     );
 
     // Get image data and convert to ASCII
-    const imageData = getImageData(
-      this.ctx,
-      CANVAS_CONFIG.WIDTH,
-      CANVAS_CONFIG.HEIGHT
-    );
+    const imageData = getImageData(this.ctx, this.width, this.height);
     const asciiStr = convertToASCII(
       imageData,
-      CANVAS_CONFIG.WIDTH,
-      CANVAS_CONFIG.HEIGHT,
+      this.width,
+      this.height,
       asciiRamp
     );
 

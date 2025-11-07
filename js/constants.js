@@ -3,8 +3,8 @@
  */
 
 export const CANVAS_CONFIG = {
-  WIDTH: 80, // smaller = faster
-  HEIGHT: 60,
+  WIDTH: 160, // smaller = faster
+  HEIGHT: 120,
 };
 
 export const DEFAULT_ASCII_RAMP = " .:-=+*#%@";

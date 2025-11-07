@@ -7,6 +7,7 @@ const video = document.getElementById("video");
 const ascii = document.getElementById("ascii");
 const asciiCharsInput = document.getElementById("asciiChars");
 const flipCameraCheckbox = document.getElementById("flipCamera");
+const detailSlider = document.getElementById("detailSlider");
 const cameraPermissionPrompt = document.getElementById(
   "cameraPermissionPrompt"
 );
@@ -36,8 +37,13 @@ function onCameraSuccess() {
   // Controls remain hidden by default - user can toggle with settings button
   outputContainer.classList.remove("hide");
 
-  // Create renderer instance
-  renderer = new ASCIIRenderer(video, ascii, getAsciiRamp);
+  // Get initial detail level and set up renderer
+  const initialLevel = parseInt(detailSlider.value);
+  const { width, height } = getCanvasSizeForDetailLevel(initialLevel);
+  updateFontSizeForDetailLevel(initialLevel);
+
+  // Create renderer instance with initial canvas size
+  renderer = new ASCIIRenderer(video, ascii, getAsciiRamp, width, height);
 
   // Start rendering when video starts playing
   video.addEventListener("play", () => {
@@ -88,6 +94,47 @@ flipCameraCheckbox.addEventListener("change", (e) => {
   if (renderer) {
     renderer.setFlipped(isFlipped);
   }
+});
+
+/**
+ * Maps detail level (1-5) to canvas dimensions
+ * @param {number} level - Detail level from 1 to 5
+ * @returns {Object} Object with width and height
+ */
+function getCanvasSizeForDetailLevel(level) {
+  const baseWidth = 80;
+  const baseHeight = 60;
+  // Level 1: 80x60, Level 2: 160x120, Level 3: 240x180, Level 4: 320x240, Level 5: 400x300
+  return {
+    width: baseWidth * level,
+    height: baseHeight * level,
+  };
+}
+
+/**
+ * Updates font size based on detail level to keep box size consistent
+ * @param {number} level - Detail level from 1 to 5
+ */
+function updateFontSizeForDetailLevel(level) {
+  // Base font size was 0.5rem for 80x60, now 0.25rem for 160x120
+  // For level N, font size should be 0.5rem / N
+  const baseFontSize = 0.5; // rem
+  const fontSize = baseFontSize / level;
+  ascii.style.fontSize = `${fontSize}rem`;
+}
+
+/**
+ * Handles detail level slider changes
+ */
+detailSlider.addEventListener("input", (e) => {
+  const level = parseInt(e.target.value);
+  const { width, height } = getCanvasSizeForDetailLevel(level);
+
+  if (renderer) {
+    renderer.updateCanvasSize(width, height);
+  }
+
+  updateFontSizeForDetailLevel(level);
 });
 
 /**
