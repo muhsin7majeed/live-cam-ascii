@@ -1,21 +1,8 @@
 :root {
-  --color-dark: #1b3c53;
-  --color-medium-dark: #234c6a;
-  --color-medium: #456882;
-  --color-light: #d2c1b6;
-
-  --color-text-primary: #1b3c53;
-  --color-text-secondary: #456882;
-  --color-text-light: #d2c1b6;
-  --color-bg-container: rgba(27, 60, 83, 0.95);
-  --color-bg-dark: #1b3c53;
-  --color-bg-medium: #234c6a;
-  --color-bg-light: #d2c1b6;
-  --color-border: #456882;
-  --color-border-light: rgba(69, 104, 130, 0.3);
-  --color-accent: #456882;
-  --color-shadow: rgba(27, 60, 83, 0.3);
-  --color-shadow-light: rgba(69, 104, 130, 0.2);
+  --color-primary: #3b0270;
+  --color-secondary: #6f00ff;
+  --color-light: #e9b3fb;
+  --color-bg-light: #fff1f1;
 }
 
 * {
@@ -29,7 +16,7 @@ body {
     Ubuntu, Cantarell, sans-serif;
   background: linear-gradient(
     135deg,
-    var(--color-medium) 0%,
+    var(--color-secondary) 0%,
     var(--color-light) 100%
   );
   min-height: 100vh;
@@ -39,7 +26,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  color: var(--color-text-primary);
+  color: var(--color-primary);
   margin: 0;
 }
 
@@ -47,10 +34,10 @@ body {
   width: 100%;
   min-height: calc(100vh - 4rem);
   max-width: 1400px;
-  background: var(--color-bg-container);
+  background: rgba(59, 2, 112, 0.95);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 20px 60px var(--color-shadow);
+  box-shadow: 0 20px 60px rgba(59, 2, 112, 0.3);
   display: flex;
   flex-direction: column;
 }
@@ -66,14 +53,14 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 0;
-  color: var(--color-text-light);
+  color: var(--color-bg-light);
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 .settings-button {
-  background: var(--color-bg-medium);
+  background: var(--color-secondary);
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -83,16 +70,16 @@ h1 {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px var(--color-shadow-light);
+  box-shadow: 0 2px 8px rgba(111, 0, 255, 0.2);
   position: absolute;
   right: 0;
-  color: var(--color-text-light);
+  color: var(--color-bg-light);
 }
 
 .settings-button:hover {
-  background: var(--color-medium);
+  background: var(--color-secondary);
   transform: rotate(90deg);
-  box-shadow: 0 4px 12px var(--color-shadow);
+  box-shadow: 0 4px 12px rgba(59, 2, 112, 0.3);
 }
 
 .settings-button:active {
@@ -125,24 +112,24 @@ h1 {
 
 label {
   font-weight: 600;
-  color: var(--color-text-light);
+  color: var(--color-bg-light);
   font-size: 0.9rem;
 }
 
 input[type="text"] {
   padding: 0.75rem 1rem;
-  border: 2px solid var(--color-border-light);
+  border: 2px solid rgba(111, 0, 255, 0.3);
   border-radius: 8px;
   font-size: 1rem;
   font-family: "Courier New", monospace;
   transition: border-color 0.2s;
   background: var(--color-bg-light);
-  color: var(--color-text-primary);
+  color: var(--color-primary);
 }
 
 input[type="text"]:focus {
   outline: none;
-  border-color: var(--color-accent);
+  border-color: var(--color-secondary);
 }
 
 .output-container {
@@ -160,7 +147,7 @@ input[type="text"]:focus {
 
 .output-label {
   font-weight: 600;
-  color: var(--color-text-light);
+  color: var(--color-bg-light);
   font-size: 1rem;
   text-align: center;
 }
@@ -170,22 +157,22 @@ input[type="text"]:focus {
   height: 600px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 4px 20px var(--color-shadow);
-  background: var(--color-bg-dark);
+  box-shadow: 0 4px 20px rgba(59, 2, 112, 0.3);
+  background: var(--color-primary);
 }
 
 #ascii {
   font-family: "Courier New", monospace;
   font-size: 0.5rem;
   line-height: 1;
-  background: var(--color-bg-dark);
-  color: var(--color-text-light);
+  background: var(--color-primary);
+  color: var(--color-bg-light);
   padding: 1rem;
   border-radius: 12px;
   overflow: auto;
   width: 100%;
   height: 600px;
-  box-shadow: 0 4px 20px var(--color-shadow);
+  box-shadow: 0 4px 20px rgba(59, 2, 112, 0.3);
   white-space: pre;
   text-align: center;
 }
@@ -209,13 +196,13 @@ input[type="text"]:focus {
 }
 
 .camera-permission-prompt h2 {
-  color: var(--color-text-light);
+  color: var(--color-bg-light);
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
 
 .camera-permission-prompt p {
-  color: var(--color-text-light);
+  color: var(--color-bg-light);
   font-size: 1rem;
   line-height: 1.6;
   max-width: 500px;
