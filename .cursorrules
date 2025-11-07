@@ -1,0 +1,64 @@
+# Live Camera ASCII Art Generator - Cursor Rules
+
+## Project Overview
+This is a real-time webcam to ASCII art converter using vanilla JavaScript. The application captures video from the user's camera and converts each frame to ASCII characters in real-time.
+
+## Technology Stack
+- **Vanilla JavaScript** (ES6+) - No frameworks or libraries
+- **HTML5 Canvas API** - For image processing and pixel manipulation
+- **MediaDevices API** - For camera access via `getUserMedia`
+- **Vite** - Build tool and dev server (referenced in HTML)
+
+## Code Style & Conventions
+
+### JavaScript
+- Use modern ES6+ syntax (const/let, arrow functions where appropriate)
+- Keep functions focused and single-purpose
+- Use descriptive variable names
+- Prefer `const` over `let` unless reassignment is needed
+- Use `requestAnimationFrame` for animation loops (already implemented)
+- Handle async operations with `.then()` or async/await
+
+### HTML
+- Use semantic HTML5 elements
+- Keep structure simple and minimal
+- Use inline styles sparingly (prefer CSS classes when possible)
+- Ensure accessibility attributes where relevant
+
+### Performance Considerations
+- Optimize canvas operations (current implementation uses small canvas size: 80x60)
+- Minimize DOM updates (update textContent once per frame)
+- Use `requestAnimationFrame` for smooth animation
+- Consider frame rate throttling if performance becomes an issue
+
+## Project Structure
+- `index.html` - Main HTML file with video and pre elements
+- `main.js` - Core JavaScript logic for camera access and ASCII conversion
+
+## Key Features
+- Real-time video capture from webcam
+- ASCII character mapping based on pixel brightness
+- Continuous rendering loop using `requestAnimationFrame`
+- ASCII ramp: `" .:-=+*#%@"` (dark to light)
+
+## Development Guidelines
+- Keep the code simple and readable
+- Maintain the real-time performance characteristics
+- Ensure camera permission handling is user-friendly
+- Consider adding error handling for camera access failures
+- Preserve the current canvas size optimization (80x60) unless performance allows larger
+
+## Future Considerations
+- Error handling for `getUserMedia` failures
+- User controls for resolution/quality
+- Different ASCII character sets
+- Color ASCII (if desired)
+- Frame rate controls
+
+## Code Modifications
+When modifying code:
+- Maintain backward compatibility with existing functionality
+- Test camera access and rendering performance
+- Ensure the ASCII output remains readable
+- Keep the animation loop efficient
+
