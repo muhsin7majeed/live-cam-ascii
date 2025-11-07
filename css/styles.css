@@ -132,6 +132,31 @@ input[type="text"]:focus {
   border-color: var(--color-secondary);
 }
 
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-secondary);
+}
+
+.checkbox-label span {
+  color: var(--color-bg-light);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#video.flipped {
+  transform: scaleX(-1);
+}
+
 .output-container {
   display: grid;
   grid-template-columns: 1fr 1fr;

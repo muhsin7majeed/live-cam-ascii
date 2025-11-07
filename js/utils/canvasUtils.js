@@ -22,9 +22,18 @@ export function createCanvas(width, height) {
  * @param {HTMLVideoElement} video - Video element to draw
  * @param {number} width - Target width
  * @param {number} height - Target height
+ * @param {boolean} flipped - Whether to flip the image horizontally
  */
-export function drawVideoToCanvas(ctx, video, width, height) {
-  ctx.drawImage(video, 0, 0, width, height);
+export function drawVideoToCanvas(ctx, video, width, height, flipped = false) {
+  if (flipped) {
+    ctx.save();
+    ctx.translate(width, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(video, 0, 0, width, height);
+    ctx.restore();
+  } else {
+    ctx.drawImage(video, 0, 0, width, height);
+  }
 }
 
 /**

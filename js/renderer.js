@@ -20,6 +20,7 @@ export class ASCIIRenderer {
     this.getAsciiRamp = getAsciiRamp;
     this.isRendering = false;
     this.animationFrameId = null;
+    this.flipped = false;
 
     // Create canvas for processing
     const { canvas, ctx } = createCanvas(
@@ -28,6 +29,14 @@ export class ASCIIRenderer {
     );
     this.canvas = canvas;
     this.ctx = ctx;
+  }
+
+  /**
+   * Sets the flip state for the camera view
+   * @param {boolean} flipped - Whether to flip the view
+   */
+  setFlipped(flipped) {
+    this.flipped = flipped;
   }
 
   /**
@@ -77,7 +86,8 @@ export class ASCIIRenderer {
       this.ctx,
       this.video,
       CANVAS_CONFIG.WIDTH,
-      CANVAS_CONFIG.HEIGHT
+      CANVAS_CONFIG.HEIGHT,
+      this.flipped
     );
 
     // Get image data and convert to ASCII

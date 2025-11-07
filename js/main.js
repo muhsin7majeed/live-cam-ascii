@@ -6,6 +6,7 @@ import { ASCIIRenderer } from "./renderer.js";
 const video = document.getElementById("video");
 const ascii = document.getElementById("ascii");
 const asciiCharsInput = document.getElementById("asciiChars");
+const flipCameraCheckbox = document.getElementById("flipCamera");
 const cameraPermissionPrompt = document.getElementById(
   "cameraPermissionPrompt"
 );
@@ -72,6 +73,21 @@ function onCameraError(error) {
  */
 asciiCharsInput.addEventListener("input", (e) => {
   asciiRamp = e.target.value || DEFAULT_ASCII_RAMP;
+});
+
+/**
+ * Handles camera flip toggle
+ */
+flipCameraCheckbox.addEventListener("change", (e) => {
+  const isFlipped = e.target.checked;
+  if (isFlipped) {
+    video.classList.add("flipped");
+  } else {
+    video.classList.remove("flipped");
+  }
+  if (renderer) {
+    renderer.setFlipped(isFlipped);
+  }
 });
 
 /**
