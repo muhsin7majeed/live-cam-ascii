@@ -12,13 +12,25 @@
     <div class="container">
       <div class="header-section">
         <h1>Live Camera to ASCII Art</h1>
-        <button
-          class="settings-button"
-          id="settingsButton"
-          aria-label="Toggle settings"
-        >
-          <span class="settings-icon">⚙️</span>
-        </button>
+        <div class="header-buttons">
+          <a
+            href="https://github.com/muhsin7majeed/live-cam-ascii"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="github-button"
+            aria-label="View on GitHub"
+            title="View on GitHub"
+          >
+            <span class="github-icon">🐙</span>
+          </a>
+          <button
+            class="settings-button"
+            id="settingsButton"
+            aria-label="Toggle settings"
+          >
+            <span class="settings-icon">⚙️</span>
+          </button>
+        </div>
       </div>
 
       <div class="camera-permission-prompt" id="cameraPermissionPrompt">
@@ -45,12 +57,14 @@
             placeholder="Enter characters from dark to light"
           />
         </div>
+
         <div class="input-group">
           <label class="checkbox-label" for="flipCamera">
             <input type="checkbox" id="flipCamera" />
             <span>Flip camera view</span>
           </label>
         </div>
+
         <div class="input-group">
           <label for="detailSlider">Detail Level:</label>
           <div class="slider-container">
@@ -75,6 +89,7 @@
           <div class="output-label">Camera View</div>
           <video id="video" autoplay playsinline></video>
         </div>
+
         <div class="output-section">
           <div class="output-label-container">
             <div class="output-label">ASCII Art</div>

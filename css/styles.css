@@ -45,6 +45,7 @@ body {
 .header-section {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   margin-bottom: 2rem;
   position: relative;
@@ -59,6 +60,43 @@ h1 {
   letter-spacing: -0.5px;
 }
 
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.github-button {
+  background: var(--color-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(111, 0, 255, 0.2);
+  color: var(--color-bg-light);
+  text-decoration: none;
+}
+
+.github-button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(59, 2, 112, 0.3);
+}
+
+.github-button:active {
+  transform: scale(1.05);
+}
+
+.github-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
 .settings-button {
   background: var(--color-secondary);
   border: none;
@@ -71,8 +109,6 @@ h1 {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(111, 0, 255, 0.2);
-  position: absolute;
-  right: 0;
   color: var(--color-bg-light);
 }
 
@@ -221,30 +257,19 @@ input[type="range"]::-moz-range-thumb:hover {
   align-items: stretch;
 }
 
-.output-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.output-section:first-child {
-  align-items: center;
-}
-
 .output-label-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .output-label {
   font-weight: 600;
   color: var(--color-bg-light);
   font-size: 1rem;
-  text-align: center;
-  flex: 1;
 }
 
 .capture-buttons {
@@ -422,11 +447,6 @@ input[type="range"]::-moz-range-thumb:hover {
 
   h1 {
     margin-bottom: 0;
-  }
-
-  .output-label-container {
-    flex-direction: column;
-    gap: 0.75rem;
   }
 
   .capture-buttons {
