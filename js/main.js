@@ -1,7 +1,11 @@
 import { DEFAULT_ASCII_RAMP, ERROR_MESSAGES } from "./constants.js";
 import { initializeCamera } from "./camera.js";
 import { ASCIIRenderer } from "./renderer.js";
-import { saveAsciiToFile, saveAsciiToImage } from "./utils/fileUtils.js";
+import {
+  saveAsciiToFile,
+  saveAsciiToImage,
+  ASCIIVideoRecorder,
+} from "./utils/fileUtils.js";
 
 // DOM elements
 const video = document.getElementById("video");
@@ -17,10 +21,14 @@ const outputContainer = document.getElementById("outputContainer");
 const settingsButton = document.getElementById("settingsButton");
 const captureTextButton = document.getElementById("captureTextButton");
 const captureImageButton = document.getElementById("captureImageButton");
+const captureVideoButton = document.getElementById("captureVideoButton");
+const recordIcon = captureVideoButton?.querySelector(".record-icon");
+const recordText = captureVideoButton?.querySelector(".record-text");
 
 // State
 let asciiRamp = DEFAULT_ASCII_RAMP;
 let renderer = null;
+let videoRecorder = null;
 
 /**
  * Gets the current ASCII character ramp
@@ -196,6 +204,76 @@ captureImageButton.addEventListener("click", () => {
     textColor: color,
     padding: 20,
   });
+});
+
+/**
+ * Handles ASCII video recording
+ */
+captureVideoButton.addEventListener("click", async () => {
+  if (videoRecorder && videoRecorder.isRecording) {
+    // Stop recording
+    try {
+      const result = await videoRecorder.stop();
+      if (result && result.blob) {
+        // Determine file extension from mime type
+        let extension = "webm";
+        if (result.mimeType.includes("mp4")) {
+          extension = "mp4";
+        } else if (result.mimeType.includes("webm")) {
+          extension = "webm";
+        }
+
+        const url = URL.createObjectURL(result.blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = generateFilename(extension);
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(() => {
+          URL.revokeObjectURL(url);
+        }, 100);
+      }
+
+      // Update button state
+      captureVideoButton.classList.remove("recording");
+      if (recordIcon) recordIcon.textContent = "●";
+      if (recordText) recordText.textContent = "Record video";
+    } catch (error) {
+      console.error("Error stopping recording:", error);
+    }
+  } else {
+    // Start recording
+    try {
+      const computedStyle = window.getComputedStyle(ascii);
+      const fontSize = parseFloat(computedStyle.fontSize);
+      const fontFamily = computedStyle.fontFamily;
+      const backgroundColor = computedStyle.backgroundColor || "#3b0270";
+      const color = computedStyle.color || "#fff1f1";
+
+      videoRecorder = new ASCIIVideoRecorder({
+        fontSize: fontSize * 2, // Scale up for better video quality
+        fontFamily: fontFamily,
+        backgroundColor: backgroundColor,
+        textColor: color,
+        padding: 20,
+        frameRate: 30,
+      });
+
+      await videoRecorder.start(() => ascii.textContent);
+
+      // Update button state
+      captureVideoButton.classList.add("recording");
+      if (recordIcon) recordIcon.textContent = "■";
+      if (recordText) recordText.textContent = "Stop recording";
+    } catch (error) {
+      console.error("Error starting recording:", error);
+      alert("Failed to start recording: " + error.message);
+    }
+  }
 });
 
 // Initially hide main content and show permission prompt

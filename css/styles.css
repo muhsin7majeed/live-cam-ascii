@@ -281,6 +281,34 @@ input[type="range"]::-moz-range-thumb:hover {
   box-shadow: 0 2px 6px rgba(111, 0, 255, 0.2);
 }
 
+.record-button {
+  position: relative;
+}
+
+.record-icon {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.record-button.recording {
+  background: #ff4444;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.record-button.recording:hover {
+  background: #ff6666;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 #video {
   width: 100%;
   max-width: 400px;
