@@ -1,6 +1,7 @@
 import { DEFAULT_ASCII_RAMP, ERROR_MESSAGES } from "./constants.js";
 import { initializeCamera } from "./camera.js";
 import { ASCIIRenderer } from "./renderer.js";
+import { saveAsciiToFile, saveAsciiToImage } from "./utils/fileUtils.js";
 
 // DOM elements
 const video = document.getElementById("video");
@@ -14,6 +15,8 @@ const cameraPermissionPrompt = document.getElementById(
 const controls = document.getElementById("controls");
 const outputContainer = document.getElementById("outputContainer");
 const settingsButton = document.getElementById("settingsButton");
+const captureTextButton = document.getElementById("captureTextButton");
+const captureImageButton = document.getElementById("captureImageButton");
 
 // State
 let asciiRamp = DEFAULT_ASCII_RAMP;
@@ -142,6 +145,57 @@ detailSlider.addEventListener("input", (e) => {
  */
 settingsButton.addEventListener("click", () => {
   controls.classList.toggle("hide");
+});
+
+/**
+ * Generates a timestamped filename
+ * @param {string} extension - File extension (e.g., 'txt', 'png')
+ * @returns {string} Timestamped filename
+ */
+function generateFilename(extension) {
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5);
+  return `ascii-art-${timestamp}.${extension}`;
+}
+
+/**
+ * Handles ASCII text capture
+ */
+captureTextButton.addEventListener("click", () => {
+  const asciiText = ascii.textContent;
+  if (!asciiText || asciiText.trim().length === 0) {
+    console.warn("No ASCII art to capture");
+    return;
+  }
+
+  const filename = generateFilename("txt");
+  saveAsciiToFile(asciiText, filename);
+});
+
+/**
+ * Handles ASCII image capture
+ */
+captureImageButton.addEventListener("click", () => {
+  const asciiText = ascii.textContent;
+  if (!asciiText || asciiText.trim().length === 0) {
+    console.warn("No ASCII art to capture");
+    return;
+  }
+
+  // Get computed styles from the pre element to match appearance
+  const computedStyle = window.getComputedStyle(ascii);
+  const fontSize = parseFloat(computedStyle.fontSize);
+  const fontFamily = computedStyle.fontFamily;
+  const backgroundColor = computedStyle.backgroundColor || "#3b0270";
+  const color = computedStyle.color || "#fff1f1";
+
+  const filename = generateFilename("png");
+  saveAsciiToImage(asciiText, filename, {
+    fontSize: fontSize * 2, // Scale up for better image quality
+    fontFamily: fontFamily,
+    backgroundColor: backgroundColor,
+    textColor: color,
+    padding: 20,
+  });
 });
 
 // Initially hide main content and show permission prompt

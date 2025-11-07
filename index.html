@@ -76,7 +76,27 @@
           <video id="video" autoplay playsinline></video>
         </div>
         <div class="output-section">
-          <div class="output-label">ASCII Art</div>
+          <div class="output-label-container">
+            <div class="output-label">ASCII Art</div>
+            <div class="capture-buttons">
+              <button
+                class="capture-button"
+                id="captureTextButton"
+                aria-label="Capture ASCII as text"
+                title="Save current ASCII art as text file"
+              >
+                Capture as text
+              </button>
+              <button
+                class="capture-button"
+                id="captureImageButton"
+                aria-label="Capture ASCII as image"
+                title="Save current ASCII art as image file"
+              >
+                Capture as image
+              </button>
+            </div>
+          </div>
           <pre id="ascii"></pre>
         </div>
       </div>
