@@ -6,6 +6,11 @@ import { ASCIIRenderer } from "./renderer.js";
 const video = document.getElementById("video");
 const ascii = document.getElementById("ascii");
 const asciiCharsInput = document.getElementById("asciiChars");
+const cameraPermissionPrompt = document.getElementById(
+  "cameraPermissionPrompt"
+);
+const controls = document.getElementById("controls");
+const outputContainer = document.getElementById("outputContainer");
 
 // State
 let asciiRamp = DEFAULT_ASCII_RAMP;
@@ -23,6 +28,12 @@ function getAsciiRamp() {
  * Handles camera initialization success
  */
 function onCameraSuccess() {
+  // Hide permission prompt and show main content
+  cameraPermissionPrompt.classList.remove("show");
+  cameraPermissionPrompt.classList.add("hide");
+  controls.classList.remove("hide");
+  outputContainer.classList.remove("hide");
+
   // Create renderer instance
   renderer = new ASCIIRenderer(video, ascii, getAsciiRamp);
 
@@ -46,7 +57,12 @@ function onCameraSuccess() {
  * @param {Error} error - Error object
  */
 function onCameraError(error) {
-  ascii.textContent = ERROR_MESSAGES.CAMERA_ACCESS;
+  // Show permission prompt and hide main content
+  cameraPermissionPrompt.classList.remove("hide");
+  cameraPermissionPrompt.classList.add("show");
+  controls.classList.add("hide");
+  outputContainer.classList.add("hide");
+
   console.error(ERROR_MESSAGES.CAMERA_GENERIC, error);
 }
 
@@ -56,6 +72,11 @@ function onCameraError(error) {
 asciiCharsInput.addEventListener("input", (e) => {
   asciiRamp = e.target.value || DEFAULT_ASCII_RAMP;
 });
+
+// Initially hide main content and show permission prompt
+controls.classList.add("hide");
+outputContainer.classList.add("hide");
+cameraPermissionPrompt.classList.add("show");
 
 // Initialize camera access
 initializeCamera(video, onCameraSuccess, onCameraError);

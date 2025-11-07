@@ -12,7 +12,21 @@
     <div class="container">
       <h1>Live Camera to ASCII Art</h1>
 
-      <div class="controls">
+      <div class="camera-permission-prompt" id="cameraPermissionPrompt">
+        <div class="permission-icon">📷</div>
+        <h2>Camera Access Required</h2>
+        <p>
+          This application needs access to your camera to generate ASCII art in
+          real-time. Please allow camera permissions when prompted, or check
+          your browser settings if you've previously denied access.
+        </p>
+        <p>
+          If you've denied access, please refresh the page and click "Allow"
+          when prompted.
+        </p>
+      </div>
+
+      <div class="controls" id="controls">
         <div class="input-group">
           <label for="asciiChars">ASCII Characters (dark to light):</label>
           <input
@@ -24,7 +38,7 @@
         </div>
       </div>
 
-      <div class="output-container">
+      <div class="output-container" id="outputContainer">
         <div class="output-section">
           <div class="output-label">Camera View</div>
           <video id="video" autoplay playsinline></video>

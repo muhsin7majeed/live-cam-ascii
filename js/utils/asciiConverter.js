@@ -56,4 +56,3 @@ export function mapBrightnessToChar(brightness, asciiRamp) {
   const index = Math.floor((brightness / 255) * (asciiRamp.length - 1));
   return asciiRamp[index];
 }
-

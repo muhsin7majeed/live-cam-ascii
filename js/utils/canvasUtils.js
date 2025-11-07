@@ -37,4 +37,3 @@ export function drawVideoToCanvas(ctx, video, width, height) {
 export function getImageData(ctx, width, height) {
   return ctx.getImageData(0, 0, width, height);
 }
-
