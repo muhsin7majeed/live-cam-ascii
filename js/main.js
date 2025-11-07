@@ -11,6 +11,7 @@ const cameraPermissionPrompt = document.getElementById(
 );
 const controls = document.getElementById("controls");
 const outputContainer = document.getElementById("outputContainer");
+const settingsButton = document.getElementById("settingsButton");
 
 // State
 let asciiRamp = DEFAULT_ASCII_RAMP;
@@ -71,6 +72,13 @@ function onCameraError(error) {
  */
 asciiCharsInput.addEventListener("input", (e) => {
   asciiRamp = e.target.value || DEFAULT_ASCII_RAMP;
+});
+
+/**
+ * Toggles the visibility of the controls section
+ */
+settingsButton.addEventListener("click", () => {
+  controls.classList.toggle("hide");
 });
 
 // Initially hide main content and show permission prompt
