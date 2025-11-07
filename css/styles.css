@@ -1,3 +1,23 @@
+:root {
+  --color-dark: #1b3c53;
+  --color-medium-dark: #234c6a;
+  --color-medium: #456882;
+  --color-light: #d2c1b6;
+
+  --color-text-primary: #1b3c53;
+  --color-text-secondary: #456882;
+  --color-text-light: #d2c1b6;
+  --color-bg-container: rgba(27, 60, 83, 0.95);
+  --color-bg-dark: #1b3c53;
+  --color-bg-medium: #234c6a;
+  --color-bg-light: #d2c1b6;
+  --color-border: #456882;
+  --color-border-light: rgba(69, 104, 130, 0.3);
+  --color-accent: #456882;
+  --color-shadow: rgba(27, 60, 83, 0.3);
+  --color-shadow-light: rgba(69, 104, 130, 0.2);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +27,11 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
-  background: linear-gradient(135deg, #f7a5a5 0%, #ffdbb6 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-medium) 0%,
+    var(--color-light) 100%
+  );
   min-height: 100vh;
   width: 100vw;
   display: flex;
@@ -15,7 +39,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  color: #333;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -23,10 +47,10 @@ body {
   width: 100%;
   min-height: calc(100vh - 4rem);
   max-width: 1400px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--color-bg-container);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px var(--color-shadow);
   display: flex;
   flex-direction: column;
 }
@@ -34,7 +58,6 @@ body {
 .header-section {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
   position: relative;
@@ -43,14 +66,14 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 0;
-  color: #2d3748;
+  color: var(--color-text-light);
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 .settings-button {
-  background: #1A2A4F;
+  background: var(--color-bg-medium);
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -60,15 +83,16 @@ h1 {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 8px var(--color-shadow-light);
   position: absolute;
   right: 0;
+  color: var(--color-text-light);
 }
 
 .settings-button:hover {
-  background: #1A2A4F;
+  background: var(--color-medium);
   transform: rotate(90deg);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px var(--color-shadow);
 }
 
 .settings-button:active {
@@ -85,7 +109,6 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center;
 }
 
 .controls.hide {
@@ -102,23 +125,24 @@ h1 {
 
 label {
   font-weight: 600;
-  color: #4a5568;
+  color: var(--color-text-light);
   font-size: 0.9rem;
 }
 
 input[type="text"] {
   padding: 0.75rem 1rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--color-border-light);
   border-radius: 8px;
   font-size: 1rem;
   font-family: "Courier New", monospace;
   transition: border-color 0.2s;
-  background: white;
+  background: var(--color-bg-light);
+  color: var(--color-text-primary);
 }
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--color-accent);
 }
 
 .output-container {
@@ -136,7 +160,7 @@ input[type="text"]:focus {
 
 .output-label {
   font-weight: 600;
-  color: #4a5568;
+  color: var(--color-text-light);
   font-size: 1rem;
   text-align: center;
 }
@@ -146,22 +170,22 @@ input[type="text"]:focus {
   height: 600px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  background: #000;
+  box-shadow: 0 4px 20px var(--color-shadow);
+  background: var(--color-bg-dark);
 }
 
 #ascii {
   font-family: "Courier New", monospace;
   font-size: 0.5rem;
   line-height: 1;
-  background: #1a202c;
-  color: #68d391;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   padding: 1rem;
   border-radius: 12px;
   overflow: auto;
   width: 100%;
   height: 600px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px var(--color-shadow);
   white-space: pre;
   text-align: center;
 }
@@ -185,13 +209,13 @@ input[type="text"]:focus {
 }
 
 .camera-permission-prompt h2 {
-  color: #2d3748;
+  color: var(--color-text-light);
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
 
 .camera-permission-prompt p {
-  color: #4a5568;
+  color: var(--color-text-light);
   font-size: 1rem;
   line-height: 1.6;
   max-width: 500px;

@@ -32,7 +32,7 @@ function onCameraSuccess() {
   // Hide permission prompt and show main content
   cameraPermissionPrompt.classList.remove("show");
   cameraPermissionPrompt.classList.add("hide");
-  controls.classList.remove("hide");
+  // Controls remain hidden by default - user can toggle with settings button
   outputContainer.classList.remove("hide");
 
   // Create renderer instance
